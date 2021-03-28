@@ -4,6 +4,8 @@ import csv
 
 ## Set initial values
 vote_count = 0
+results = {}
+
 
 ## READ DATA FROM CSV FILE
 ## Define path for CSV file
@@ -23,6 +25,16 @@ with open(input_path, mode='r', newline='', encoding='utf-8') as csv_file:
         ## Count number of votes (rows)
         vote_count += 1
    
+        ## Check for new candidate
+        if row[2] not in results:
+            ## Add new candidate (key) and count first vote
+            results[row[2]] = 1
+        else:
+            ## Accumulate vote for existing candidate
+            results[row[2]] += 1
+
 
 print(vote_count)
+print(results)
+
 
