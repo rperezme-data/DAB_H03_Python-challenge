@@ -33,8 +33,17 @@ with open(input_path, mode='r', newline='', encoding='utf-8') as csv_file:
             ## Accumulate vote for existing candidate
             results[row[2]] += 1
 
+## PRINT REPORT
+print()
+print("Election Results")
+print("------------------------------")
+print(f"Total Votes: {vote_count:,}")
+print("------------------------------")
 
-print(vote_count)
-print(results)
+for key, value in results.items():
+    print(f"{key}: {value/vote_count:.3%} ({value:,})")
 
-
+print("------------------------------")
+print(f"Winner: {max(results, key=results.get)}")
+print("------------------------------")
+print()
