@@ -2,6 +2,7 @@
 import os
 import csv
 
+
 ## Set initial values
 vote_count = 0
 results = {}
@@ -33,17 +34,34 @@ with open(input_path, mode='r', newline='', encoding='utf-8') as csv_file:
             ## Accumulate vote for existing candidate
             results[row[2]] += 1
 
-## PRINT REPORT
-print()
-print("Election Results")
-print("------------------------------")
-print(f"Total Votes: {vote_count:,}")
-print("------------------------------")
 
-for key, value in results.items():
-    print(f"{key}: {value/vote_count:.3%} ({value:,})")
+## PRINT RESULTS
+## Print Results as a function
+def print_results():
 
-print("------------------------------")
-print(f"Winner: {max(results, key=results.get)}")
-print("------------------------------")
-print()
+    results_header = [
+        "Election Results",
+        "------------------------------",
+        f"Total Votes: {vote_count:,}",
+        "------------------------------"
+        ]
+
+    results_candidates = []
+    for key, value in results.items():
+        results_candidates.append(f"{key}: {value/vote_count:.3%} ({value:,})")
+    
+    results_winner = [
+        "------------------------------",
+        f"Winner: {max(results, key=results.get)}",
+        "------------------------------"
+        ]   
+
+    return (results_header + results_candidates + results_winner)
+
+
+## PRINT RESULTS TO THE TERMINAL
+
+for line in print_results():
+    print(line)
+
+# print(print_results())
