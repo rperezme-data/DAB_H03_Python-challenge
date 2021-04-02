@@ -2,10 +2,6 @@
 import os
 import csv
 
-## Define path for csv file
-input_path = os.path.join('Resources','budget_data.csv')
-# print(csv_path)
-
 # Set variable for first month
 first_month = True
 
@@ -13,13 +9,16 @@ first_month = True
 month_count = 0
 total_pnl = 0
 last_pnl = 0
-pnl_change = 0
 pnl_change_list = []
+month_list = []
+avg_change = 0
 
-max_increase_value = 0
-max_increase_month = ""
-max_decrease_value = 0
-max_decrease_month = ""
+
+## READ DATA FROM CSV FILE
+
+## Define path for CSV file
+input_path = os.path.join('Resources','budget_data.csv')
+# print(csv_path)
 
 ## Read CSV file
 with open(input_path, mode='r', newline='', encoding='utf-8') as csv_file:
@@ -35,33 +34,25 @@ with open(input_path, mode='r', newline='', encoding='utf-8') as csv_file:
     
     ## Loop through CSV rows
     for row in csv_reader:
-            #print(row)
+            # print(row)
 
             ## Count number of months (rows)
             month_count += 1
 
             ## Sum Profits/Losses
-            total_pnl += int(row[1])
+            total_pnl += float(row[1])
 
             ## Skip first month since there is no P/L change for the initial value
             if first_month == False:
 
                 ## Compute Profits/Losses change for current month [Change = Current - Last]
-                pnl_change = int(row[1]) - last_pnl
-                pnl_change_list.append(pnl_change)
+                pnl_change_list.append(float(row[1]) - last_pnl)
 
-                ##
-                if pnl_change > max_increase_value:
-                    max_increase_value = pnl_change
-                    max_increase_month = row[0]
-
-                ##
-                if pnl_change < max_decrease_value:
-                    max_decrease_value = pnl_change
-                    max_decrease_month = row[0]
+                ## Store current month in parallel list
+                month_list.append(row[0])
 
             ## Store current P/L for next month's analysis
-            last_pnl = int(row[1])
+            last_pnl = float(row[1])
 
             ## Set variable for subsequent months 
             first_month = False
@@ -70,6 +61,13 @@ with open(input_path, mode='r', newline='', encoding='utf-8') as csv_file:
 ## Compute P/L average change [AVG = sum(n) / n] 
 avg_change = sum(pnl_change_list) / len(pnl_change_list)
 
+## Compute P/L max increase
+max_increase_value = max(pnl_change_list)
+max_increase_month = month_list[pnl_change_list.index(max_increase_value)]
+
+## Compute P/L max decrease
+max_decrease_value = min(pnl_change_list)
+max_decrease_month = month_list[pnl_change_list.index(max_decrease_value)]
 
 ## Print Report as a function
 def print_report():
@@ -77,16 +75,16 @@ def print_report():
         "Financial Analysis",
         "------------------------------",
         f"Total months: {month_count}",
-        f"Total: ${total_pnl:,}",
+        f"Total: ${total_pnl:,.0f}",
         f"Average Change: ${avg_change:,.2f}",
-        f"Greatest Increase in Profits: {max_increase_month} (${max_increase_value:,})",
-        f"Greatest Decrease in Profits: {max_decrease_month} (${max_decrease_value:,})",
+        f"Greatest Increase in Profits: {max_increase_month} (${max_increase_value:,.0f})",
+        f"Greatest Decrease in Profits: {max_decrease_month} (${max_decrease_value:,.0f})"
         ])
 
 
 ## EXPORT REPORT TO A TEXT FILE
 
-## Define path for text file
+## Define path for TXT file
 output_path = os.path.join('Analysis','PyBank_Report.txt')
 # print(output_path)
 
@@ -98,6 +96,6 @@ with open(output_path, mode='w', newline='', encoding='utf-8') as txt_file:
 
 
 ## PRINT REPORT TO THE TERMINAL
-
+##
 for line in print_report():
     print(line)
