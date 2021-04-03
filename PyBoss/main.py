@@ -1,0 +1,124 @@
+## Dependencies
+import os
+import csv
+
+## Set dictionary for State Abbreviations
+## Reference: https://gist.github.com/afhaque/29f0f4f37463c447770517a6c17d08f5
+us_state_abbrev = {
+    'Alabama': 'AL',
+    'Alaska': 'AK',
+    'Arizona': 'AZ',
+    'Arkansas': 'AR',
+    'California': 'CA',
+    'Colorado': 'CO',
+    'Connecticut': 'CT',
+    'Delaware': 'DE',
+    'Florida': 'FL',
+    'Georgia': 'GA',
+    'Hawaii': 'HI',
+    'Idaho': 'ID',
+    'Illinois': 'IL',
+    'Indiana': 'IN',
+    'Iowa': 'IA',
+    'Kansas': 'KS',
+    'Kentucky': 'KY',
+    'Louisiana': 'LA',
+    'Maine': 'ME',
+    'Maryland': 'MD',
+    'Massachusetts': 'MA',
+    'Michigan': 'MI',
+    'Minnesota': 'MN',
+    'Mississippi': 'MS',
+    'Missouri': 'MO',
+    'Montana': 'MT',
+    'Nebraska': 'NE',
+    'Nevada': 'NV',
+    'New Hampshire': 'NH',
+    'New Jersey': 'NJ',
+    'New Mexico': 'NM',
+    'New York': 'NY',
+    'North Carolina': 'NC',
+    'North Dakota': 'ND',
+    'Ohio': 'OH',
+    'Oklahoma': 'OK',
+    'Oregon': 'OR',
+    'Pennsylvania': 'PA',
+    'Rhode Island': 'RI',
+    'South Carolina': 'SC',
+    'South Dakota': 'SD',
+    'Tennessee': 'TN',
+    'Texas': 'TX',
+    'Utah': 'UT',
+    'Vermont': 'VT',
+    'Virginia': 'VA',
+    'Washington': 'WA',
+    'West Virginia': 'WV',
+    'Wisconsin': 'WI',
+    'Wyoming': 'WY',
+}
+
+## Set initial values
+employee_id = []
+first_name = []
+last_name = []
+dob = []
+ssn = []
+state = []
+
+## READ DATA FROM CSV FILE
+
+## Define path for CSV file
+input_path = os.path.join('Resources','employee_data.csv')
+input_path = os.path.join('Resources','example_data.csv')
+
+## Read CSV file
+with open(input_path, mode='r', newline='', encoding='utf-8') as csv_file:
+        
+    ## Split data on commas
+    csv_reader = csv.reader(csv_file, delimiter=',')
+
+    ## Get CSV header 
+    csv_header = next(csv_reader)
+    print(f"CSV Header: {csv_header}")
+    
+    ## Loop through CSV rows
+    for row in csv_reader:
+            
+            ##
+            employee_id.append(row[0])
+
+            ##
+            name_split = row[1].split(sep=' ')
+            first_name.append(name_split[0])
+            last_name.append(name_split[1])
+
+            ##
+            dob_split = row[2].split(sep='-')
+            dob.append(dob_split[1] + "/" + dob_split[2] + "/" + dob_split[0])
+
+            ##
+            ssn_split = row[3].split(sep='-')
+            ssn.append("***-**-" + ssn_split[2])
+
+            ##
+            state.append(us_state_abbrev[row[4]])
+
+format_conversion = zip (employee_id, first_name, last_name, dob, ssn, state)
+
+for line in format_conversion:
+    print (line)
+
+
+
+
+
+## EXPORT REPORT TO A CSV FILE
+
+## Define path for CSV file
+output_path = os.path.join('Analysis','PyBoss_Conversion.csv')
+
+## Write CSV file
+# with open(output_path, mode='w', newline='', encoding='utf-8') as csv_file:
+
+
+
