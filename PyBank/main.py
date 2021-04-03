@@ -9,9 +9,7 @@ first_month = True
 month_count = 0
 total_pnl = 0
 last_pnl = 0
-pnl_change_list = []
-month_list = []
-avg_change = 0
+pnl_change = {}
 
 
 ## READ DATA FROM CSV FILE
@@ -38,18 +36,15 @@ with open(input_path, mode='r', newline='', encoding='utf-8') as csv_file:
 
             ## Count number of months (rows)
             month_count += 1
-
+            
             ## Sum Profits/Losses
             total_pnl += float(row[1])
 
             ## Skip first month since there is no P/L change for the initial value
             if first_month == False:
 
-                ## Compute Profits/Losses change for current month [Change = Current - Last]
-                pnl_change_list.append(float(row[1]) - last_pnl)
-
-                ## Store current month in parallel list
-                month_list.append(row[0])
+                ## Compute Profits/Losses change for current month [Change = Current - Last] and Store month as key
+                pnl_change[(row[0])] = float(row[1]) - last_pnl
 
             ## Store current P/L for next month's analysis
             last_pnl = float(row[1])
@@ -58,16 +53,17 @@ with open(input_path, mode='r', newline='', encoding='utf-8') as csv_file:
             first_month = False
 
 
+## P/L CHANGE SUMMARY
+
 ## Compute P/L average change [AVG = sum(n) / n] 
-avg_change = sum(pnl_change_list) / len(pnl_change_list)
+avg_change = sum(pnl_change.values()) / (len(pnl_change))
 
-## Compute P/L max increase
-max_increase_value = max(pnl_change_list)
-max_increase_month = month_list[pnl_change_list.index(max_increase_value)]
+## Get P/L change max increase & Store as tuple (month, value)
+max_increase = (max(pnl_change, key=pnl_change.get), max(pnl_change.values()))
 
-## Compute P/L max decrease
-max_decrease_value = min(pnl_change_list)
-max_decrease_month = month_list[pnl_change_list.index(max_decrease_value)]
+## Get P/L change max decrease & Store as tuple (month, value)
+max_decrease = (min(pnl_change, key=pnl_change.get), min(pnl_change.values()))
+
 
 ## Print Report as a function
 def print_report():
@@ -77,8 +73,8 @@ def print_report():
         f"Total months: {month_count}",
         f"Total: ${total_pnl:,.0f}",
         f"Average Change: ${avg_change:,.2f}",
-        f"Greatest Increase in Profits: {max_increase_month} (${max_increase_value:,.0f})",
-        f"Greatest Decrease in Profits: {max_decrease_month} (${max_decrease_value:,.0f})"
+        f"Greatest Increase in Profits: {max_increase[0]} (${max_increase[1]:,.0f})",
+        f"Greatest Decrease in Profits: {max_decrease[0]} (${max_decrease[1]:,.0f})"
         ])
 
 
@@ -96,6 +92,9 @@ with open(output_path, mode='w', newline='', encoding='utf-8') as txt_file:
 
 
 ## PRINT REPORT TO THE TERMINAL
-##
+## Print line-by-line
 for line in print_report():
     print(line)
+
+
+# print(print_report())
