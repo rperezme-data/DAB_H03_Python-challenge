@@ -65,9 +65,12 @@ max_increase = (max(pnl_change, key=pnl_change.get), max(pnl_change.values()))
 max_decrease = (min(pnl_change, key=pnl_change.get), min(pnl_change.values()))
 
 
+## PRINT REPORT
 ## Print Report as a function
 def print_report():
-    return ([
+
+    ##
+    report = [
         "Financial Analysis",
         "------------------------------",
         f"Total months: {month_count}",
@@ -75,7 +78,9 @@ def print_report():
         f"Average Change: ${avg_change:,.2f}",
         f"Greatest Increase in Profits: {max_increase[0]} (${max_increase[1]:,.0f})",
         f"Greatest Decrease in Profits: {max_decrease[0]} (${max_decrease[1]:,.0f})"
-        ])
+        ]
+    ##
+    return (report)
 
 
 ## EXPORT REPORT TO A TEXT FILE
