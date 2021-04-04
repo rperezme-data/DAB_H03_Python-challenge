@@ -2,13 +2,11 @@
 import os
 import csv
 
-
-## Set initial values
-vote_count = 0
-results = {}
+## Set dictionary {candidate (key) : number of votes (value)}
+results_dict = {}
 
 
-## READ DATA FROM CSV FILE
+## IMPORT DATA FROM CSV FILE
 ## Define path for CSV file
 input_path = os.path.join('Resources','election_data.csv')
 
@@ -17,64 +15,64 @@ with open(input_path, mode='r', newline='', encoding='utf-8') as csv_file:
     
     ## Split data on commas
     csv_reader = csv.reader(csv_file, delimiter=',')
-    ## Get CSV header 
-    csv_header = next(csv_reader)
+    
+    ## Skip CSV header 
+    next(csv_reader)
+    
     ## Loop through CSV rows
-
     for row in csv_reader:
-
-        ## Count number of votes (rows)
-        vote_count += 1
-   
+        
         ## Check for new candidate
-        if row[2] not in results:
-            ## Add new candidate (key) and count first vote
-            results[row[2]] = 1
+        if row[2] not in results_dict:
+            ## Add new candidate (key) and count first vote (value)
+            results_dict[row[2]] = 1
         else:
-            ## Accumulate vote for existing candidate
-            results[row[2]] += 1
+            ## Accumulate vote (value) for existing candidate
+            results_dict[row[2]] += 1
 
+## Compute total votes = Sum of votes (values) of all candidates
+vote_count = sum(results_dict.values())
 
-## PRINT RESULTS
-## Print Results as a function
-def print_results():
+## GENERATE RESULTS
+## Generate Results as a function
+def gen_results():
 
-    ##
+    ## Results report header & Total Votes
     results_header = [
         "Election Results",
         "------------------------------",
         f"Total Votes: {vote_count:,}",
         "------------------------------"
         ]
-    ##
+
+    ## Results report votes per candidate
     results_candidates = []
-    for key, value in results.items():
+    for key, value in results_dict.items():
         results_candidates.append(f"{key}: {value/vote_count:.3%} ({value:,})")
-    ##
+
+    ## Results report winner (candidate with most votes)
     results_winner = [
         "------------------------------",
-        f"Winner: {max(results, key=results.get)}",
+        f"Winner: {max(results_dict, key=results_dict.get)}",
         "------------------------------"
-        ]   
-    ##
+        ]
+
+    ## Return Results as a collection of lists
     return (results_header + results_candidates + results_winner)
 
 
-## EXPORT REPORT TO A TEXT FILE
-
+## EXPORT RESULTS TO TXT FILE
 ## Define path for TXT file
 output_path = os.path.join('Analysis','PyPoll_Results.txt')
 
 ## Write TXT file
 with open(output_path, mode='w', newline='', encoding='utf-8') as txt_file:
-    ##
-    for line in print_results():
+    ## Write line-by-line loop
+    for line in gen_results():
         txt_file.write(line + "\n")
 
 
-## PRINT RESULTS TO THE TERMINAL
-##
-for line in print_results():
+## PRINT RESULTS TO TERMINAL
+## Print line-by-line loop
+for line in gen_results():
     print(line)
-
-# print(print_results())

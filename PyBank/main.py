@@ -2,37 +2,33 @@
 import os
 import csv
 
-# Set variable for first month
+# Set boolean for first month
 first_month = True
 
 ## Set initial values
 month_count = 0
 total_pnl = 0
 last_pnl = 0
+
+## Set dictionary {month (key) : P/L change (value)}
 pnl_change = {}
 
 
-## READ DATA FROM CSV FILE
-
+## IMPORT DATA FROM CSV FILE
 ## Define path for CSV file
 input_path = os.path.join('Resources','budget_data.csv')
-# print(csv_path)
 
 ## Read CSV file
 with open(input_path, mode='r', newline='', encoding='utf-8') as csv_file:
-    # print(csv_file)
     
     ## Split data on commas
     csv_reader = csv.reader(csv_file, delimiter=',')
-    # print(csv_reader)
 
-    ## Get CSV header 
-    csv_header = next(csv_reader)
-    # print(f"CSV Header: {csv_header}")
+    ## Skip CSV header 
+    next(csv_reader)
     
     ## Loop through CSV rows
     for row in csv_reader:
-            # print(row)
 
             ## Count number of months (rows)
             month_count += 1
@@ -65,11 +61,11 @@ max_increase = (max(pnl_change, key=pnl_change.get), max(pnl_change.values()))
 max_decrease = (min(pnl_change, key=pnl_change.get), min(pnl_change.values()))
 
 
-## PRINT REPORT
-## Print Report as a function
-def print_report():
+## GENERATE REPORT
+## Generate Report as a function
+def gen_report():
 
-    ##
+    ## Financial Analysis Report
     report = [
         "Financial Analysis",
         "------------------------------",
@@ -79,27 +75,23 @@ def print_report():
         f"Greatest Increase in Profits: {max_increase[0]} (${max_increase[1]:,.0f})",
         f"Greatest Decrease in Profits: {max_decrease[0]} (${max_decrease[1]:,.0f})"
         ]
-    ##
+    
+    ## Return Report as a list
     return (report)
 
 
-## EXPORT REPORT TO A TEXT FILE
-
+## EXPORT REPORT TO TXT FILE
 ## Define path for TXT file
 output_path = os.path.join('Analysis','PyBank_Report.txt')
-# print(output_path)
 
 ## Write TXT file
 with open(output_path, mode='w', newline='', encoding='utf-8') as txt_file:
-    # print(txt_file)
-    for line in print_report():
+    ## Write line-by-line loop
+    for line in gen_report():
         txt_file.write(line + "\n")
 
 
-## PRINT REPORT TO THE TERMINAL
-## Print line-by-line
-for line in print_report():
+## PRINT REPORT TO TERMINAL
+## Print line-by-line loop
+for line in gen_report():
     print(line)
-
-
-# print(print_report())

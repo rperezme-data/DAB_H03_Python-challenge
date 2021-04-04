@@ -2,7 +2,7 @@
 import os
 import csv
 
-## Set dictionary for State Abbreviations
+## SET DICTIONARY FOR STATE ABBREVIATIONS {State (key) : Abbreviation (value)}
 ## Reference: https://gist.github.com/afhaque/29f0f4f37463c447770517a6c17d08f5
 us_state_abbrev = {
     'Alabama': 'AL',
@@ -65,7 +65,8 @@ dob = []
 ssn = []
 state = []
 
-## IMPORT FROM CSV FILE
+
+## IMPORT DATA FROM CSV FILE
 ## Define path for CSV file
 input_path = os.path.join('Resources','employee_data.csv')
 
@@ -78,10 +79,10 @@ with open(input_path, mode='r', newline='', encoding='utf-8') as csv_file:
     ## Skip CSV header 
     next(csv_reader)
         
-    ## Loop through CSV rows & Change format
+    ## Loop through CSV rows
     for row in csv_reader:
             
-            ## Store 'Emp ID' column as is
+            ## Store 'Emp ID' column "as is"
             employee_id.append(row[0])
 
             ## Split 'Name' column into separate 'First Name' and 'Last Name' columns
@@ -122,6 +123,3 @@ with open(output_path, mode='w', newline='', encoding='utf-8') as csv_file:
 
     # Write zipped rows (format conversion)
     csv_writer.writerows(format_conversion)
-
-
-
