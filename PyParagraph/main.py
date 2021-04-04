@@ -17,7 +17,14 @@ with open(input_path, mode='r', newline='', encoding='utf-8') as txt_file:
 
 
 ## Count number of words
-word_count = re.findall('\w+', paragraph)
+word_list = re.findall('\w+', paragraph)
 
-print(word_count)
-print(len(word_count))
+## Count number of sentences
+# sentence_list = re.split('\.', paragraph)
+sentence_list = re.split('(?<=[.!?]) +', paragraph)
+
+# print(word_list)
+print(len(word_list))
+
+# print(sentence_list)
+print(len(sentence_list))
