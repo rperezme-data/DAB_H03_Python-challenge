@@ -2,9 +2,6 @@
 import os
 import re
 
-## Set initial values
-letter_count = 0
-words_per_sentence = []
 
 ## IMPORT DATA FROM TXT FILE
 ## Define path for TXT file
@@ -27,28 +24,19 @@ word_count = len(re.findall('\w+', paragraph))
 sentence_count = len(re.split('(?<=[.!?]) +', paragraph))
 
 
-print(sentence_count)
-print(word_count)
-print(letter_count)
+## GENERATE REPORT
+## Generate Report as a function
+def gen_report():
 
-
-# print(word_list)
-# print(len(word_list))
-
-# print(sentence_list)
-# print(len(sentence_list))
-
-# for item in sentence_list:
-#     words_per_sentence.append(len(re.findall('\w+', item)))
-
-
-
-# print(sum(words_per_sentence))
-
-
-# for item in word_list:
-#     letter_count += (len(item))
-
-# # print(letter_count / len(word_list))
-
-# print (len(re.findall('\w', paragraph)))
+    ## Paragraph Analysis Report
+    report = [
+        "Paragraph Analysis",
+        "------------------------------",
+        f"Approximate Word Count: {word_count}",
+        f"Approximate Sentence Count: {sentence_count}",
+        f"Average Letter Count: {letter_count / word_count:.1f}",
+        f"Average Sentence Length: {word_count / sentence_count:.1f}"
+        ]
+    
+    ## Return Report as a list
+    return (report)
