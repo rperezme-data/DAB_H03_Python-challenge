@@ -1,9 +1,9 @@
 # Python-challenge
 This set of four Python scripts are basic examples of the Data Analysis workflow:
-1) Read data from input files (csv/txt)
-2) Analyse data (looping through rows, computing and summarizing)
-3) Write results into output files (csv/txt)
-4) Print results to terminal
+1) Read data from input files (csv/txt).
+2) Analyse data (looping through rows, computing and summarizing).
+3) Write results into output files (csv/txt).
+4) Print results to terminal.
 
 ## 1. PyBank
 This script reads financial records from a CSV file with the following structure:
@@ -14,7 +14,7 @@ Using a `for` loop, the script counts the number of months, computes the sum of 
 
 To summarize the Profit/Losses change information, the script computes the *P/L average change* and gets the *Greatest increase in Profits* and the *Greatest increase in Profits* (or Greatest increase in Losses) over the entire period.
 
-At the end, the script generates a report through a function and writes the report to an output file (txt) and print it to the terminal.
+At the end, the script generates a *Financial Analysis* report through a function and writes the report to a TXT output file and prints it to the terminal.
 
 ## 2. PyPoll
 This script reads election data from a CSV file with the following structure:
@@ -25,7 +25,7 @@ Using a `for` loop, the script stores (and summarizes) the election data in a di
 
 The dictionary structure provides a simple way to generate the election results using *{key:value}* pairs to display the complete *List of candidates* who received votes, the *Percentage of votes* and the *Number of votes* each candidate won. The winner candidate is selected calling the `max()` and `get()` built-in functions.
 
-At the end, the script generates a report through a function and writes the report to an output file (txt) and print it to the terminal.
+At the end, the script generates an *Election Results* report through a function and writes the report to a TXT output file and prints it to the terminal.
 
 ## 3. PyBoss
 This script reads employee data from a CSV file with the following structure: 
@@ -33,27 +33,26 @@ This script reads employee data from a CSV file with the following structure:
 | --- | --- | --- | --- | ---
 
 Using a `for` loop, the script converts and stores the data into lists according to a required format:
-- The *Name* column is split into separate *First Name* and *Last Name* columns.
-- The *DOB* data is re-written into *MM/DD/YYYY* format (converting from *YYYY-MM-DD*).
-- The *SSN* data is re-written using asterisk (\*) character to hide the first five numbers from view.
-- The *State* data is re-written two-letter abbreviations.
++ The *Name* column is split into separate *First Name* and *Last Name* columns.
++ The *DOB* data is re-written into *MM/DD/YYYY* format (converting from *YYYY-MM-DD*).
++ The *SSN* data is re-written using asterisk (\*) character to hide the first five numbers from view.
++ The *State* data is re-written two-letter abbreviations.
 
-After setting a list for the formatted columns header, the script calls the `zip()` function to "lock" all lists together into tuples.
-Finally, the script exports the formatted data to a CSV file using `csv.writer()` functions.
+The formatted columns header is set as follows:
+| Emp ID | First Name | Last Name | DOB | SSN | State
+| --- | --- | --- | --- | --- | ---
 
-Note:
-The *Python Dictionary for State Abbreviations* (https://gist.github.com/afhaque/29f0f4f37463c447770517a6c17d08f5) is used for the *State* data conversion.
+Finally, the script calls the `zip()` function to "lock" all lists together into tuples and exports the formatted data to a CSV file using `csv.writer()` functions.
+
+**Note:**<br>
+The *Python Dictionary for State Abbreviations* https://gist.github.com/afhaque/29f0f4f37463c447770517a6c17d08f5 is used to convert *State* data.
 
 ## 4. PyParagraph
+This script reads a passage (paragraph) from a TXT file and stores it to perform a simple analyisis using Regular Expression (*RegEx*) functions.
+*RegEx* is then used to define search patterns and assess the passage for each of the following:
++ Approximate word count.
++ Approximate sentence count.
++ Approximate letter count (per word).
++ Average sentence length (in words).
 
-RegEx
-
-
-
-
-
-
-
-
-
-
+At the end, the script generates a *Paragraph Analysis* report through a function and writes the report to a TXT output file and prints it to the terminal.
