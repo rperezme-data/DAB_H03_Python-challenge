@@ -17,17 +17,39 @@ To summarize the Profit/Losses change information, the script computes the *P/L 
 At the end, the script generates a report through a function and writes the report to an output file (txt) and print it to the terminal.
 
 ## 2. PyPoll
-This script reads election data form a CSV file with the following structure:
+This script reads election data from a CSV file with the following structure:
 | Voter ID | County | Candidate
 | --- | --- | ---
 
-Using a `for` loop, the script stores (and summarizes) the election data in a dictionary: *{candidate (key) : number of votes (value)}*. If a new candidate is detected, it adds the name as a key and counts the vote. If no new candidate is detected, it accumulates the vote for the existing one. After the loop is complete, the script computes the total number of votes of all candidates.
+Using a `for` loop, the script stores (and summarizes) the election data in a dictionary: *{candidate (key) : number of votes (value)}*. If a new candidate is detected, it adds the name as a key and counts the vote. If no new candidate is detected, it accumulates the vote for the existing one. After the loop is complete, the script computes the *Total number of votes* calling the `sum()` of votes (values) of all candidates.
 
-The dictionary structure allows to generate the election results using *{key:value}* pairs to display the complete list of candidates who received votes, the percentage of votes and the total number of votes each candidate won. The winner candidate is selected calling the `max()` and `get()` built-in functions.
+The dictionary structure provides a simple way to generate the election results using *{key:value}* pairs to display the complete *List of candidates* who received votes, the *Percentage of votes* and the *Number of votes* each candidate won. The winner candidate is selected calling the `max()` and `get()` built-in functions.
 
 At the end, the script generates a report through a function and writes the report to an output file (txt) and print it to the terminal.
 
 ## 3. PyBoss
+This script reads employee data from a CSV file with the following structure: 
+| Emp ID | Name | DOB | SSN | State
+| --- | --- | --- | --- | ---
+
+Using a `for` loop, the script converts and stores the data into lists according to a required format:
+- The *Name* column is split into separate *First Name* and *Last Name* columns.
+- The *DOB* data is re-written into *MM/DD/YYYY* format (converting from *YYYY-MM-DD*).
+- The *SSN* data is re-written using asterisk (\*) character to hide the first five numbers from view.
+- The *State* data is re-written two-letter abbreviations.
+
+After setting a list for the formatted columns header, the script calls the `zip()` function to "lock" all lists together into tuples.
+Finally, the script exports the formatted data to a CSV file using `csv.writer()` functions.
+
+Note:
+The *Python Dictionary for State Abbreviations* (https://gist.github.com/afhaque/29f0f4f37463c447770517a6c17d08f5) is used for the *State* data conversion.
+
+## 4. PyParagraph
+
+RegEx
+
+
+
 
 
 
