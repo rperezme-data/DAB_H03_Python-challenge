@@ -56,5 +56,6 @@ At the end, the script generates a *Paragraph Analysis* report through a functio
 
 ## Notes
 
-> [1]: The *Python Dictionary for State Abbreviations* is used to convert *State* data.<br>
-> - Reference: https://gist.github.com/afhaque/29f0f4f37463c447770517a6c17d08f5
+[1]: The *Python Dictionary for State Abbreviations* is used to convert *State* data.<br>
+> Reference:
+> https://gist.github.com/afhaque/29f0f4f37463c447770517a6c17d08f5
