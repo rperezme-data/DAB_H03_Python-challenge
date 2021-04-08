@@ -44,11 +44,6 @@ The formatted data header is set as follows:
 
 Finally, the script calls the `zip()` function to "lock" all lists together into tuples and exports the formatted data to a CSV output file using `csv.writer()` functions.
 
-**Notes:**<br>
-[1]
-> The *Python Dictionary for State Abbreviations* is used to convert *State* data.<br>
-> - Reference: https://gist.github.com/afhaque/29f0f4f37463c447770517a6c17d08f5
-
 ## 4. PyParagraph
 This script reads a passage (paragraph) from a TXT file and stores it to perform a simple analyisis using Regular Expression (*RegEx*) functions.
 *RegEx* is then used to define search patterns and assess the passage for each of the following:
@@ -58,3 +53,8 @@ This script reads a passage (paragraph) from a TXT file and stores it to perform
 + Average sentence length (in words).
 
 At the end, the script generates a *Paragraph Analysis* report through a function and writes the report to a TXT output file and prints it to the terminal.
+
+## Notes
+
+> [1]: The *Python Dictionary for State Abbreviations* is used to convert *State* data.<br>
+> - Reference: https://gist.github.com/afhaque/29f0f4f37463c447770517a6c17d08f5
