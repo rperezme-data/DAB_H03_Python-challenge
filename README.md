@@ -36,16 +36,17 @@ Using a `for` loop, the script converts and stores the data into lists according
 + The *Name* column is split into separate *First Name* and *Last Name* columns.
 + The *DOB* data is re-written into *MM/DD/YYYY* format (converting from *YYYY-MM-DD*).
 + The *SSN* data is re-written using asterisk (\*) character to hide the first five numbers from view.
-+ The *State* data is re-written two-letter abbreviations.
++ The *State* data is re-written two-letter abbreviations [1].
 
 The formatted columns header is set as follows:
 | Emp ID | First Name | Last Name | DOB | SSN | State
 | --- | --- | --- | --- | --- | ---
 
-Finally, the script calls the `zip()` function to "lock" all lists together into tuples and exports the formatted data to a CSV file using `csv.writer()` functions.
+Finally, the script calls the `zip()` function to "lock" all lists together into tuples and exports the formatted data to a CSV output file using `csv.writer()` functions.
 
-**Note:**<br>
-The *Python Dictionary for State Abbreviations* https://gist.github.com/afhaque/29f0f4f37463c447770517a6c17d08f5 is used to convert *State* data.
+**Note [1]:**
+> The *Python Dictionary for State Abbreviations* is used to convert *State* data.<br>
+> Reference: https://gist.github.com/afhaque/29f0f4f37463c447770517a6c17d08f5
 
 ## 4. PyParagraph
 This script reads a passage (paragraph) from a TXT file and stores it to perform a simple analyisis using Regular Expression (*RegEx*) functions.
